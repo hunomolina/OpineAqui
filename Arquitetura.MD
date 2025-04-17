@@ -51,7 +51,7 @@
 - e-mail (opcional)
 - Nome (opcional)
 - Celular (opcional)
-- Empresa avaliada
+- Empresa avaliada (dropdown)
 - Data do atendimento
 - Nota - 0 a 10
 - Comentário
