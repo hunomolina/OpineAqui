@@ -42,6 +42,10 @@
     - data ou período
     - nota atribuída
 - Dashboard com informações extraídas dos dados
+    - NPS x estrelas 1-5?
+    - ver exemplo mercado livre
+    - apresentar "avaliações recentes"
+    - botão exportar dados?
 - (avaliar) extrair lista com e-mails separados com “;” para envio de marketing por e-mail.
 
 **Cliente**
@@ -95,32 +99,34 @@ Botão → Realiza POST do formulário para backend
 **Cliente**
 
 - id (pk)
-- email
-- nome
-- celular
-- autorizacao_marketing
+- email - varchar/NULLABLE
+- nome - varchar/NULLABLE
+- celular - int/NULLABLE
+- autorizacao_marketing - boolean
 
 **Avaliação**
 
 - id (pk)
 - id_cliente (fk)
 - id_empresa (fk)
-- data_atendimento
-- nota
-- comentario
+- data_atendimento - date
+- nota - int
+- comentario - varchar/NULLABLE
 
 **Empresa**
 
 - id (pk)
-- cnpj
-- email
-- nome
-- descricao
-- senha
-- razao_social
-- endereço
-- atividade
-- Data_cadastro
+- cnpj - varchar
+- email - varchar
+- nome - varchar
+- descricao - varchar
+- senha - varchar
+- razao_social - varchar
+- endereço - varchar
+- atividade - varchar
+- Data_cadastro - date
+- ativa - boolean #se ativa no cadastro OpineAqui
+- data de inativação - date
 
 ### Recursos úteis
 
