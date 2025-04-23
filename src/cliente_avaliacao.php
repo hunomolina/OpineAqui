@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cliente_email = isset($_POST["cliente_email"]) ? $_POST["cliente_email"] : "";
     $cliente_nome = isset($_POST["cliente_nome"]) ? $_POST["cliente_nome"] : "";
     $cliente_celular = isset($_POST["cliente_celular"]) ? $_POST["cliente_celular"] : "";
-    $cliente_autorizacao_marketing = isset($_POST["cliente_autorizacao_marketing"]) ? true : false;
+    $cliente_autorizacao_marketing = isset($_POST["cliente_autorizacao_marketing"]) ? 1 : 0;
     
     $id_cliente = cadastrar_cliente(
         $cliente_email,

@@ -1,6 +1,14 @@
 <?php
 require_once 'bd_conexao.php';
-session_start()
+session_start();
+if (empty($_SESSION["empresa_id"])) {
+    echo "Recurso não permitido. <br>";
+    echo "<script>
+        setTimeout(function() {
+        window.location.href = 'index.php'},1000);
+        </script>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +51,7 @@ if ($avaliacoes->num_rows > 0) {
         echo "<td>" . $row["data_atendimento"] . "</td>";
         echo "<td>" . $row["nota"] . "</td>";
         echo "<td>" . $row["comentario"] . "</td>";
-        echo "<td>" . $row["autorizacao_marketing"] . "</td>";
+        echo "<td>" . ($row["autorizacao_marketing"] ? 'Sim' : '') . "</td>";
         echo "</tr>";
     }
     echo "</tr>";

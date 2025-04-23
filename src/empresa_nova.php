@@ -38,7 +38,6 @@ session_start()
 
 <?
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // if(isset($_POST["logon_email"]) && isset($_POST["logon_senha"]) ) {
 
         $cadastro_status = cadastrar_empresa(
             $_POST["empresa_cnpj"],

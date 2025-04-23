@@ -60,7 +60,6 @@ if ($empresas->num_rows > 0) {
 
 <?
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // if(isset($_POST["logon_email"]) && isset($_POST["logon_senha"]) ) {
 
         $cadastro_status = alterar_empresa(
             $_SESSION['empresa_id'],

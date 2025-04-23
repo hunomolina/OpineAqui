@@ -49,16 +49,14 @@ function select_avaliacoes($id_empresa) {
 
 function cadastrar_cliente($email=null, $nome=null, $celular=null, $autorizacao_marketing=null) {
     global $conn;
-    //verifica se cliente forneceu dado de e-mail
+
     if ($email != "" && $email != null) {
-        //verifica se cliente existe na base de dados
         $check_email = $conn->query("SELECT id FROM `Cliente` WHERE email = '$email'");
     }
     else {
         return;
     }
     if ($check_email->num_rows > 0) {
-        //se já existir obtém seu id e altera dados do cliente
         $id_cliente = $check_email->fetch_object()->id;
         $conn->query(
             "UPDATE Cliente 
@@ -72,7 +70,6 @@ function cadastrar_cliente($email=null, $nome=null, $celular=null, $autorizacao_
         return $id_cliente;
     }
     else {
-        //se não existir, cadastra novo cliente
         $conn->query(
             "INSERT INTO Cliente (email, nome, celular, autorizacao_marketing)
             VALUES ('$email', '$nome', '$celular', $autorizacao_marketing);"
@@ -93,10 +90,6 @@ function cadastrar_avaliacao($id_empresa, $data_atendimento, $nota, $comentario,
 
 
 function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco, $atividade) {
-    //verificar se empresa já existe na base de dados
-    //se já existir, pegar id
-    //se não existir, cadastrar nova empresa, pegar id e jogar id na session state
-
     global $conn;
     $query = $conn->query("SELECT id FROM Empresa WHERE cnpj = $cnpj");
     if ($query->num_rows > 0) {
@@ -108,6 +101,7 @@ function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco, 
         VALUES ($cnpj, '$email', '$nome', '$descricao', '$senha', '$endereco', '$atividade');"
         );
         $_SESSION['empresa_id'] = $conn->insert_id;
+        $_SESSION['empresa_nome'] = $nome;
     return true;
     
 }
@@ -139,8 +133,6 @@ function logon_empresa($email, $senha) {
         $row = $query->fetch_assoc();
         $_SESSION['empresa_id'] = $row['id'];
         $_SESSION['empresa_nome'] = $row['nome'];
-        // $_SESSION['empresa_cnpj'] = $row['cnpj'];
-        // $id_empresa = $query->fetch_object()->id;
         return true;
     }
     else {
