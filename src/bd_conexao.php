@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
+
 $serverName = "db";
 $databaseName = "opine_aqui";
 $dbUsername = "root";
@@ -11,12 +13,8 @@ if ($conn->connect_error) {
 }
 
 
-function dados_empresa($id_empresa = "") {
+function dados_empresa($id_empresa) {
     global $conn;
-    if ($id_empresa == "") {
-        $query = $conn->query("SELECT * FROM Empresa");
-        return $query;
-    }
     $query = $conn->query("SELECT * FROM Empresa WHERE id = $id_empresa");
     return $query;
 }
@@ -103,20 +101,21 @@ function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco, 
     $query = $conn->query("SELECT id FROM Empresa WHERE cnpj = $cnpj");
     if ($query->num_rows > 0) {
         echo "Empresa já cadastrada. Faça o login";
-        return;
+        return false;
     }
     $conn->query(
         "INSERT INTO Empresa (cnpj, email, nome, descricao, senha, endereco, atividade)
         VALUES ($cnpj, '$email', '$nome', '$descricao', '$senha', '$endereco', '$atividade');"
         );
-
-    return;
+        $_SESSION['empresa_id'] = $conn->insert_id;
+    return true;
     
 }
 
+
 function alterar_empresa($id_empresa, $cnpj, $email, $nome, $descricao, $senha, $endereco, $atividade) {
     global $conn;
-    $query = $conn->query(
+    $conn->query(
         "UPDATE Empresa 
         SET 
             cnpj = $cnpj,
@@ -128,28 +127,25 @@ function alterar_empresa($id_empresa, $cnpj, $email, $nome, $descricao, $senha, 
             atividade = '$atividade' 
         WHERE id = $id_empresa"
     );
-    return;
+    $_SESSION['empresa_nome'] = $nome;
+    return true;
 }
 
 
-function logon_empresa($cnpj, $senha) {
+function logon_empresa($email, $senha) {
     global $conn;
-    $query = $conn->query("SELECT id, cnpj, nome FROM Empresa WHERE cnpj = $cnpj AND senha = $senha");
+    $query = $conn->query("SELECT id, cnpj, nome FROM Empresa WHERE email = '$email' AND senha = '$senha'");
     if ($query->num_rows > 0) {
         $row = $query->fetch_assoc();
         $_SESSION['empresa_id'] = $row['id'];
         $_SESSION['empresa_nome'] = $row['nome'];
-        $_SESSION['empresa_cnpj'] = $row['cnpj'];
+        // $_SESSION['empresa_cnpj'] = $row['cnpj'];
         // $id_empresa = $query->fetch_object()->id;
-        // return $id_empresa;
+        return true;
     }
     else {
-        return null;
+        return false;
     }
-}
-
-function logoff_empresa() {
-    session_unset();
 }
 
 ?>
