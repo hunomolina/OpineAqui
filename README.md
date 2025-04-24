@@ -22,7 +22,7 @@ OBS: a sua conta github deverá ser vinculada ao GitHub Desktop
 OBS: o comando -v apagará todos os registros feitos em banco de dados, que serão recriados a cada execução do `docker compose up`.
 
 ## Como usar o ambiente de desenvolvimento
-1. Commit é o salvamento de uma versão do código. Como boa prática, recomenda-se que o commit seja feito **apenas** na branch nova criada, **nunca** no repositório *main*. As alterações na *main* devem ser 
+1. Commit é o salvamento de uma versão do código. Como boa prática, recomenda-se que o commit seja feito **apenas** na branch nova criada, **nunca** no repositório *main*. As alterações na *main* devem ser realizadas via **Pull Request**.
 2. Ao final da execução do `docker compose up`, o containeres estarão acessíveis na rede interna do computador: *localhost*.
 - Acesso à aplicação PHP: [http://localhost](http://localhost)
 - Acesso ao PHPMyAdmin: [http://localhost:8080](http://localhost:8080)
