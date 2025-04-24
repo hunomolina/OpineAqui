@@ -18,8 +18,8 @@ OBS: a sua conta github deverá ser vinculada ao GitHub Desktop
 
 1. Clonar o repositório do GitHub. Pelo GitHub Desktop, utilizar as opções do aplicativo para clonar o repositório - [instruções](https://docs.github.com/pt/desktop/adding-and-cloning-repositories/cloning-and-forking-repositories-from-github-desktop).
 2. Crie uma nova branch no GitHub, a partir da branch main - [instruções](https://docs.github.com/pt/desktop/making-changes-in-a-branch/managing-branches-in-github-desktop).
-3. Acesse a pasta raiz do projeto pela linha de comando (pode ser do VS Code, por exemplo) na pasta raiz do projeto e rodar o comando `docker compose up`. Esse comando subirá todos os containeres docker do stack e os manterá em execução até que seja encerrado pelo comando `docker compose down -v`. 
-OBS: o comando -v apagará todos os registros feitos em banco de dados, que serão recriados a cada execução do `docker compose up`.
+3. Acesse a pasta raiz do projeto pela linha de comando (pode ser do VS Code, por exemplo) e rodar o comando `docker compose up`. Esse comando subirá todos os containeres dockerer do stack e os manterá em execução até que seja encerrado pelo comando `docker compose down -v`. 
+OBS: o comando -v apagará todos os registros feitos em banco de dados, que serão recriados a cada nova execução do `docker compose up`.
 
 ## Como usar o ambiente de desenvolvimento
 1. Commit é o salvamento de uma versão do código. Como boa prática, recomenda-se que o commit seja feito **apenas** na branch nova criada, **nunca** no repositório *main*. As alterações na *main* devem ser realizadas via **Pull Request**.
