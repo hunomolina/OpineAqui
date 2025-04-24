@@ -38,9 +38,9 @@ services:
       - db
       - phpmyadmin
     ports:
-      - "3000:80"
+      - "80:80"
     expose:
-      - "3000"
+      - "80"
     restart: unless-stopped
     command: bash -c "a2enmod rewrite && docker-php-ext-install mysqli pdo_mysql pdo && apache2-foreground"
 

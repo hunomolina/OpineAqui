@@ -13,7 +13,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 <h1>Opine Aqui</h1>
 
-<a href="empresa_nova.php">Cadastrar nova empresa</a><br><br>
+<a href="empresa_adicionar.php">Cadastrar nova empresa</a><br><br>
 <a href="empresa_logon.php">Logon empresa</a><br><br>
 <a href="cliente_avaliacao.php">Avalie uma empresa</a><br><br>
 
