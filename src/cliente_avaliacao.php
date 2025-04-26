@@ -14,24 +14,33 @@ require_once 'bd_conexao.php';
 <h1>Opine Aqui - Avalie uma empresa</h1>
 
 
-<h2>Dados da empresa</h2>
+<h2>Dados do atendimento</h2>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" name='empresa_cadastrar' id='empresa_cadastrar'>
     
     <label for="empresa_avaliada">Empresa avaliada:</label>
     <?php
-    $lista_empresas = lista_empresas();
-    if ($lista_empresas->num_rows > 0) {
-        echo "<select name='empresa_avaliada' id='empresa_avaliada'>";
-        echo "<option disabled selected value> - Selecione uma empresa - </option>";
-        while ($row = $lista_empresas->fetch_assoc()) {
-            echo "<option value='" . $row["id"] . "'>" . 
-            $row["nome"] . "</option>";
+
+    if (isset($_GET['id'])) {
+        $empresa_id = $_GET['id'];
+        echo nome_empresa($empresa_id);
+        echo "<input type='hidden' name='empresa_avaliada' value='" . $empresa_id . "'>";
+    } else {
+
+        $lista_empresas = lista_empresas();
+        if ($lista_empresas->num_rows > 0) {
+            echo "<select name='empresa_avaliada' id='empresa_avaliada'>";
+            echo "<option disabled selected value> - Selecione uma empresa - </option>";
+            while ($row = $lista_empresas->fetch_assoc()) {
+                echo "<option value='" . $row["id"] . "'>" . 
+                $row["nome"] . "</option>";
+            }
+            echo "</select>";
         }
-        echo "</select>";
-    }
-    else {
-        throw new Exception("Registros não localizados.");
+        else {
+            throw new Exception("Registros não localizados.");
+        }
+    
     }
     ?><br>
     

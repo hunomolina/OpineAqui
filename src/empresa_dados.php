@@ -29,6 +29,10 @@ if (empty($_SESSION["empresa_id"])) {
 
 <br><br>
 
+<p>Para que seus clientes avaliem sua empresa, copie e envie este link para eles: <a href="<?php echo '/cliente_avaliacao.php?id=' . $_SESSION['empresa_id']; ?>"><?php echo $_SERVER['HTTP_HOST'] . '/cliente_avaliacao.php?id=' . $_SESSION['empresa_id']; ?></a></p>
+
+<br><br>
+
 <?php
 $avaliacoes = select_avaliacoes($_SESSION['empresa_id']);
 if ($avaliacoes->num_rows > 0) {

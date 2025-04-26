@@ -19,6 +19,16 @@ function dados_empresa($id_empresa) {
     return $query;
 }
 
+function nome_empresa($id_empresa) {
+    global $conn;
+    $query = $conn->query("SELECT nome FROM Empresa WHERE id = $id_empresa");
+    if ($query->num_rows > 0) {
+        return $query->fetch_object()->nome;
+    } else {
+        return "NÃO LOCALIZADA";
+    }
+}
+
 
 function lista_empresas() {
     global $conn;
