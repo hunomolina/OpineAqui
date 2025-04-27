@@ -27,12 +27,12 @@ session_start()
     <input type="text" name="empresa_cnpj" id="empresa_cnpj" required><br>
     <label for="empresa_nome">Nome da Empresa:</label>
     <input type="text" name="empresa_nome" id="empresa_nome" required><br>
-    <label for="empresa_descricao">Descrição:</label>
+    <label for="empresa_descricao">Descrição da atividade:</label>
     <input type="text" name="empresa_descricao" id="empresa_descricao" required><br>
     <label for="empresa_endereco">Endereço:</label>
     <input type="text" name="empresa_endereco" id="empresa_endereco" required><br>
-    <label for="empresa_atividade">Atividade:</label>
-    <input type="text" name="empresa_atividade" id="empresa_atividade" required><br>
+    <!-- <label for="empresa_atividade">Atividade:</label>
+    <input type="text" name="empresa_atividade" id="empresa_atividade" required><br> -->
     <input type="submit" name="submit" value="Enviar"><br>
 </form>
 
@@ -46,8 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["empresa_nome"], 
             $_POST["empresa_descricao"],
             $_POST["empresa_senha"],
-            $_POST["empresa_endereco"],
-            $_POST["empresa_atividade"]
+            $_POST["empresa_endereco"]
         );
 
         if ($cadastro_status) {

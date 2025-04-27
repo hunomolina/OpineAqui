@@ -19,9 +19,10 @@ function dados_empresa($id_empresa) {
     return $query;
 }
 
+
 function nome_empresa($id_empresa) {
     global $conn;
-    $query = $conn->query("SELECT nome FROM Empresa WHERE id = $id_empresa");
+    $query = $conn->query("SELECT nome FROM Empresa WHERE id = $id_empresa AND status_ativo = 1");
     if ($query->num_rows > 0) {
         return $query->fetch_object()->nome;
     } else {
@@ -32,7 +33,7 @@ function nome_empresa($id_empresa) {
 
 function lista_empresas() {
     global $conn;
-    $query = $conn->query("SELECT nome,id FROM Empresa");
+    $query = $conn->query("SELECT nome,id FROM Empresa WHERE status_ativo = 1");
     return $query;
 }
 
@@ -71,7 +72,6 @@ function cadastrar_cliente($email=null, $nome=null, $celular=null, $autorizacao_
         $conn->query(
             "UPDATE Cliente 
             SET 
-                email = '$email',
                 nome = '$nome', 
                 celular = '$celular', 
                 autorizacao_marketing = $autorizacao_marketing 
@@ -99,7 +99,7 @@ function cadastrar_avaliacao($id_empresa, $data_atendimento, $nota, $comentario,
 }
 
 
-function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco, $atividade) {
+function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco) {
     global $conn;
     $query = $conn->query("SELECT id FROM Empresa WHERE cnpj = $cnpj OR email = '$email'");
     if ($query->num_rows > 0) {
@@ -107,8 +107,8 @@ function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco, 
         return false;
     }
     $conn->query(
-        "INSERT INTO Empresa (cnpj, email, nome, descricao, senha, endereco, atividade)
-        VALUES ($cnpj, '$email', '$nome', '$descricao', '$senha', '$endereco', '$atividade');"
+        "INSERT INTO Empresa (cnpj, email, nome, descricao, senha, endereco)
+        VALUES ($cnpj, '$email', '$nome', '$descricao', '$senha', '$endereco');"
         );
         $_SESSION['empresa_id'] = $conn->insert_id;
         $_SESSION['empresa_nome'] = $nome;
@@ -117,7 +117,7 @@ function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco, 
 }
 
 
-function alterar_empresa($id_empresa, $cnpj, $email, $nome, $descricao, $senha, $endereco, $atividade) {
+function alterar_empresa($id_empresa, $cnpj, $email, $nome, $descricao, $senha, $endereco) {
     global $conn;
     $conn->query(
         "UPDATE Empresa 
@@ -127,27 +127,45 @@ function alterar_empresa($id_empresa, $cnpj, $email, $nome, $descricao, $senha, 
             email = '$email', 
             descricao = '$descricao', 
             senha = '$senha', 
-            endereco = '$endereco',
-            atividade = '$atividade' 
+            endereco = '$endereco'
         WHERE id = $id_empresa"
     );
     $_SESSION['empresa_nome'] = $nome;
     return true;
 }
 
+function inativar_empresa($id_empresa) {
+    global $conn;
+    $conn->query(
+        "UPDATE Empresa
+        SET 
+            status_ativo = 0
+            -- ,data_alteracao = date('Y-m-d\TH:i')
+        WHERE id = $id_empresa"
+    );
+    return true;
+}
+
 
 function logon_empresa($email, $senha) {
     global $conn;
-    $query = $conn->query("SELECT id, cnpj, nome FROM Empresa WHERE email = '$email' AND senha = '$senha'");
+    $query = $conn->query("SELECT id, cnpj, nome, status_ativo FROM Empresa WHERE email = '$email' AND senha = '$senha'");
     if ($query->num_rows > 0) {
         $row = $query->fetch_assoc();
         $_SESSION['empresa_id'] = $row['id'];
         $_SESSION['empresa_nome'] = $row['nome'];
+        if ($row['status_ativo'] == 0) {
+            $conn->query(
+                "UPDATE Empresa
+                SET 
+                    status_ativo = 1
+                    -- ,data_alteracao = date('Y-m-d\TH:i')
+                WHERE id = {$row['id']}"
+            );
+        } 
         return true;
     }
     else {
         return false;
     }
 }
-
-?>

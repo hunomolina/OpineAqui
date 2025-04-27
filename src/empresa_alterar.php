@@ -1,6 +1,14 @@
 <?php
 require_once 'bd_conexao.php';
-session_start()
+session_start();
+if (empty($_SESSION["empresa_id"])) {
+    echo "Recurso não permitido. <br>";
+    echo "<script>
+        setTimeout(function() {
+        window.location.href = 'index.php'},1000);
+        </script>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +18,9 @@ session_start()
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpineAqui</title>
 </head>
+
+
+
 <body>
 
 <h1>Opine Aqui - Alterar dados da empresa</h1>
@@ -18,6 +29,8 @@ session_start()
 
 <a href="empresa_dados.php">Voltar</a><br>
 <a href="empresa_logoff.php">Logoff</a><br>
+<a href="#" onclick="inativar_empresa();">Inativar empresa na plataforma OpineAqui</a><br>
+
 <br><br>
 
 
@@ -31,7 +44,6 @@ if ($empresas->num_rows > 0) {
         $descricao = $row["descricao"];
         $senha = $row["senha"];
         $endereco = $row["endereco"];
-        $atividade = $row["atividade"];
     } 
 } else {
     echo "Cadastro não localizados.<br>";
@@ -49,12 +61,10 @@ if ($empresas->num_rows > 0) {
     <input type="text" name="empresa_cnpj" id="empresa_cnpj" value="<?php echo $cnpj; ?>" required><br>
     <label for="empresa_nome">Nome da Empresa:</label>
     <input type="text" name="empresa_nome" id="empresa_nome" value="<?php echo $nome; ?>" required><br>
-    <label for="empresa_descricao">Descrição:</label>
+    <label for="empresa_descricao">Descrição da atividade:</label>
     <input type="text" name="empresa_descricao" id="empresa_descricao" value="<?php echo $descricao; ?>" required><br>
     <label for="empresa_endereco">Endereço:</label>
     <input type="text" name="empresa_endereco" id="empresa_endereco" value="<?php echo $endereco; ?>" required><br>
-    <label for="empresa_atividade">Atividade:</label>
-    <input type="text" name="empresa_atividade" id="empresa_atividade" value="<?php echo $atividade; ?>" required><br>
     <input type="submit" name="submit" value="Enviar"><br>
 </form>
 
@@ -69,8 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["empresa_nome"], 
             $_POST["empresa_descricao"],
             $_POST["empresa_senha"],
-            $_POST["empresa_endereco"],
-            $_POST["empresa_atividade"]
+            $_POST["empresa_endereco"]
+
         );
 
         if ($cadastro_status) {
@@ -89,4 +99,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 </body>
+<script>
+function inativar_empresa() {
+    if (confirm("Tem certeza que deseja descadastrar sua empresa?") == true) {
+        window.location.href = 'empresa_inativar.php';
+    }
+}
+</script>
 </html>

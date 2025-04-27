@@ -1,8 +1,8 @@
 USE opine_aqui;
 
-INSERT INTO Empresa (cnpj, email, nome, descricao, senha, endereco, atividade)
-VALUES  (11111111000111, "11@teste.com", "Empresa Um", "Empresa criada para testes", "123456", "Rua Um, n. 1, Bairro Um, São Paulo/SP, CEP 11111-111", "Comércio de bolos artesanais"),
-        (22222222000222, "22@teste.com", "Empresa Dois", "Empresa Dois para testes", "123456", "Rua Dois, n. 2, Bairro Dois, São Paulo/SP, CEP 22222-222", "Manicure e pedicure");
+INSERT INTO Empresa (cnpj, email, nome, descricao, senha, endereco)
+VALUES  (11111111000111, "11@teste.com", "Empresa Um", "Lanchonete", "123456", "Rua Um, n. 1, Bairro Um, São Paulo/SP, CEP 11111-111"),
+        (22222222000222, "22@teste.com", "Empresa Dois", "Manicure", "123456", "Rua Dois, n. 2, Bairro Dois, São Paulo/SP, CEP 22222-222");
 
 INSERT INTO Cliente (email, nome, celular, autorizacao_marketing)
 VALUES  ("fulano@teste.com", "Fulano de Tal", "11-111111111", 1),
