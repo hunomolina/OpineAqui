@@ -1,12 +1,28 @@
 USE opine_aqui;
 
 INSERT INTO Empresa (cnpj, email, nome, descricao, senha, endereco)
-VALUES  (11111111000111, "11@teste.com", "Empresa Um", "Lanchonete", "123456", "Rua Um, n. 1, Bairro Um, São Paulo/SP, CEP 11111-111"),
-        (22222222000222, "22@teste.com", "Empresa Dois", "Manicure", "123456", "Rua Dois, n. 2, Bairro Dois, São Paulo/SP, CEP 22222-222");
+VALUES  (11111111000111, "1@teste.com", "Empresa Um", "Lanchonete", "1234", "Rua Um, n. 1, Bairro Um, São Paulo/SP, CEP 11111-111"),
+        (22222222000222, "2@teste.com", "Empresa Dois", "Manicure", "1234", "Rua Dois, n. 2, Bairro Dois, São Paulo/SP, CEP 22222-222"),
+        (33333333000333, "3@teste.com", "Empresa Três", "Atividade hoteleira", "1234", "Rua Três, n. 3, Bairro Três, Rio de Janeiro/RJ, CEP 33333-333"),
+        (44444444000444, "4@teste.com", "Empresa Quatro", "Consultoria de TI", "1234", "Av. Quatro, n. 4, Centro, Belo Horizonte/MG, CEP 44444-444"),
+        (55555555000555, "5@teste.com", "Empresa Cinco", "Restaurante e Café", "1234", "Praça Cinco, n. 5, Bairro Cinco, Curitiba/PR, CEP 55555-555"),
+        (66666666000666, "6@teste.com", "Empresa Seis", "Serviços de Limpeza", "1234", "Rua Seis, n. 6, Zona Norte, Porto Alegre/RS, CEP 66666-666"),
+        (77777777000777, "7@teste.com", "Empresa Sete", "E-commerce de livros", "1234", "Av. Sete, n. 7, Bairro Sete, Salvador/BA, CEP 77777-777"),
+        (88888888000888, "8@teste.com", "Empresa Oito", "Gráfica Rápida", "1234", "Rua Oito, n. 8, Bairro Oito, Fortaleza/CE, CEP 88888-888"),
+        (99999999000999, "9@teste.com", "Empresa Nove", "Clínica Médica", "1234", "Av. Nove, n. 9, Centro, Recife/PE, CEP 99999-999")
+        ;
 
 INSERT INTO Cliente (email, nome, celular, autorizacao_marketing)
 VALUES  ("fulano@teste.com", "Fulano de Tal", "11-111111111", 1),
-        ("cicrano@teste.com", "Cicrano de Tal", "11-222222222", 1);
+        ("cicrano@teste.com", "Cicrano de Tal", "11-222222222", 0),
+        ("beltrana@teste.com", "Beltrana da Silva", "21-987654321", 1),
+        ("fulana.souza@exemplo.com", "Fulana Souza", "(31) 99876-5432", 0),
+        ("joao.santos@mail.com", "João Santos", "41-999998888", 1),
+        ("maria.oliveira@web.net", "Maria Oliveira", "(51) 98888-9999", 0),
+        ("pedro.pereira@novo.org", "Pedro Pereira", "61-123456789", 1),
+        ("ana.costa@empresa.com", "Ana Costa", "71-55554444", 1),
+        ("rui.fernandes@ideias.net", "Rui Fernandes", "(85) 98765-1234", 0)
+        ;
 
 INSERT INTO Avaliacao (id_cliente, id_empresa, data_atendimento, nota, comentario)
 VALUES  (1, 1, "2025-04-17 12:45:00", 10, "Muito bom, recomendo!"),
@@ -87,5 +103,52 @@ VALUES  (1, 1, "2025-04-17 12:45:00", 10, "Muito bom, recomendo!"),
         (NULL, 2, "2025-06-18 12:00:00", 9, "Muito bom, recomendo!"),
         (1, 2, "2025-06-19 13:00:00", 7, "Bom atendimento."),
         (2, 1, "2025-06-20 14:00:00", 6, "Atendimento razoável."),
-        (NULL, 1, "2025-06-21 15:00:00", 8, "Gostei do atendimento.")
+        (NULL, 1, "2025-06-21 15:00:00", 8, "Gostei do atendimento."),
+        (1, 1, "2025-01-20 20:00:00", 9, "Gostei bastante do atendimento."),
+        (NULL, 1, "2025-02-21 20:00:00", 8, "Gostei muito do atendimento."),
+        (3, 5, "2024-12-01 14:30:00", 10, "Excelente!"),
+        (7, 9, "2025-04-20 09:15:00", 9, "Atendimento impecável."),
+        (NULL, 2, "2025-03-05 17:00:00", 6, "Serviço mediano."),
+        (5, 3, "2024-11-22 10:00:00", 8, "Bom serviço."),
+        (9, 8, "2025-01-15 11:45:00", 4, "Não gostei."),
+        (1, 4, "2025-04-26 16:00:00", 10, "Altamente recomendado!"),
+        (4, 6, "2025-02-18 13:00:00", 7, "Atendeu às expectativas."),
+        (8, 1, "2025-03-29 08:00:00", 2, "Horrível, evitem."),
+        (NULL, 7, "2024-10-10 15:00:00", 9, "Qualidade acima do esperado."),
+        (6, 3, "2025-04-01 19:30:00", 5, "Mais ou menos."),
+        (2, 5, "2025-01-25 09:00:00", 1, "Desastroso!"),
+        (NULL, 8, "2025-03-20 14:00:00", 8, "Tudo ok."),
+        (3, 9, "2024-11-05 16:00:00", 10, "Muito satisfeito com o serviço."),
+        (7, 1, "2025-04-27 09:00:00", 3, "Problemas no atendimento."),
+        (5, 2, "2025-02-10 10:30:00", 7, "Podia melhorar um pouco."),
+        (9, 6, "2024-12-18 11:00:00", 9, "Cumpre o que promete e mais um pouco!"),
+        (1, 3, "2025-03-03 12:00:00", 6, "Esperava mais."),
+        (4, 7, "2025-04-14 18:00:00", 1, "Inaceitável!"),
+        (8, 5, "2025-01-01 20:00:00", 10, "Perfeito para o Ano Novo!"),
+        (NULL, 4, "2024-10-25 14:00:00", 8, "Bom custo-benefício."),
+        (6, 9, "2025-03-17 15:00:00", 4, "Muito decepcionado."),
+        (2, 1, "2025-04-05 11:00:00", 9, "Voltarei com certeza."),
+        (3, 2, "2025-02-28 13:30:00", 5, "Teve alguns problemas."),
+        (7, 8, "2024-11-11 10:00:00", 10, "Serviço rápido e eficiente."),
+        (5, 4, "2025-04-22 17:00:00", 3, "Experiência ruim."),
+        (9, 5, "2025-01-08 09:00:00", 7, "OK para o básico."),
+        (1, 7, "2025-03-25 14:00:00", 9, "Equipa muito simpática."),
+        (4, 9, "2024-12-07 18:00:00", 2, "Não voltaria."),
+        (8, 3, "2025-04-10 11:00:00", 8, "Processo simples."),
+        (NULL, 6, "2025-02-14 15:00:00", 5, "Pode melhorar a comunicação."),
+        (6, 1, "2025-03-21 10:00:00", 10, "Simplesmente fantástico!"),
+        (2, 4, "2025-01-30 08:30:00", 4, "Demorou muito."),
+        (3, 5, "2025-04-24 12:00:00", 7, "Razoável."),
+        (7, 2, "2024-11-15 19:00:00", 9, "Ambiente agradável."),
+        (5, 8, "2025-03-08 16:00:00", 3, "Produto com defeito."),
+        (9, 1, "2025-04-03 14:00:00", 8, "Funcionou como esperado."),
+        (1, 6, "2025-02-01 10:00:00", 6, "Serviço sem brilho."),
+        (4, 3, "2025-03-27 11:00:00", 1, "Totalmente insatisfeito."),
+        (8, 7, "2024-12-24 21:00:00", 10, "Presente de Natal perfeito!"),
+        (NULL, 9, "2025-04-19 15:00:00", 7, "Entrega rápida."),
+        (6, 2, "2025-01-04 14:00:00", 4, "Atendimento confuso."),
+        (2, 8, "2025-03-15 09:00:00", 9, "Profissionais competentes."),
+        (3, 4, "2025-04-08 17:30:00", 5, "Não me impressionou."),
+        (7, 5, "2025-02-20 11:00:00", 8, "Boa experiência no geral."),
+        (5, 1, "2025-03-19 10:00:00", 10, "Serviço top de linha!")
         ;
