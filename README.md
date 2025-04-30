@@ -27,3 +27,7 @@ OBS: o comando -v apagará todos os registros feitos em banco de dados, que ser�
 - Acesso à aplicação PHP: [http://localhost](http://localhost)
 - Acesso ao PHPMyAdmin: [http://localhost:8080](http://localhost:8080)
 - Acesso direto ao MariaDB (por aplicação própria): [http://localhost:3306](http://localhost:3306)
+
+## Prova de conceito do dashboard
+- feito com python, necessita de instalação das bibliotecas apontadas em requirements.txt
+- executar no terminal o comando stremlit run dash.py e abrir navegador com [localhost](http://localhost:8501)
