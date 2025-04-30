@@ -10,13 +10,15 @@
 
 **Empresa - cadastro:**
 
-- CNPJ
-- E-mail
-- Telefone
-- Nome conhecido na região
-- Descrição da atividade
-- Endereço (usar API CNPJ ou API do correio?)
-- Senha
+- cnpj (VARCHAR)
+- data_alteracao (DATETIME)
+- data_criacao (DATETIME)
+- descricao (VARCHAR)
+- email (VARCHAR)
+- endereco (VARCHAR)
+- nome (VARCHAR)
+- senha (VARCHAR)
+- status_ativo (BOOLEAN)
 
 **Empresa - login:**
 
@@ -25,10 +27,8 @@
 
 **Empresa - alteração de cadastro (após logado):**
 
-- E-mail
-- Telefone
-- Nome conhecido na região
-- Senha
+- email (VARCHAR)
+- senha (VARCHAR)
 
 **Empresa - visualização de dados (após logado):**
 
