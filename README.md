@@ -30,4 +30,4 @@ OBS: o comando -v apagará todos os registros feitos em banco de dados, que ser�
 
 ## Prova de conceito do dashboard
 - feito com python, necessita de instalação das bibliotecas apontadas em requirements.txt
-- executar no terminal o comando streamlit run dash.py e abrir navegador com [localhost](http://localhost:8501)
+- executar no terminal o comando streamlit run dash.py e abrir navegador com [(http://localhost:8501)](http://localhost:8501)
