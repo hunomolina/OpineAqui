@@ -37,6 +37,28 @@ if (empty($_SESSION["empresa_id"])) {
 
 <?php
 $avaliacoes = select_avaliacoes($_SESSION['empresa_id']);
+
+$result = nota_media($_SESSION['empresa_id']);
+if ($result && $row = $result->fetch_assoc()) {
+    echo "Nota média: " . $row['media_ponderada'] . "<br><br>";
+} else {
+    echo "Não foi possível determinar a nota média.<br><br>";
+}
+$result = maior_nota($_SESSION['empresa_id']);
+if ($result && $row = $result->fetch_assoc()) {
+    echo "Maior nota: " . $row['maior_nota'] . "<br><br>";
+} else {
+    echo "Não foi possível determinar a maior nota.<br><br>";
+}
+
+$result = menor_nota($_SESSION['empresa_id']);
+if ($result && $row = $result->fetch_assoc()) {
+    echo "Menor nota: " . $row['menor_nota'] . "<br><br>";
+} else {
+    echo "Não foi possível determinar a menor nota.<br><br>";
+}
+
+
 if ($avaliacoes->num_rows > 0) {
     echo "<table border='1' style='border-collapse: collapse; border: 1px solid black;'>";
     echo "<tr><th colspan='7'><h2>Lista avaliações da empresa logada</h2></th></tr>";

@@ -169,3 +169,59 @@ function logon_empresa($email, $senha) {
         return false;
     }
 }
+
+function maior_nota($id_empresa) {
+    global $conn;
+    $query = $conn->query(
+
+        "SELECT 
+        MAX(nota) as maior_nota
+        FROM (
+        SELECT 
+            a.nota
+        FROM Avaliacao AS a
+        JOIN Empresa AS e ON a.id_empresa = e.id
+        WHERE e.id = $id_empresa
+        GROUP BY e.nome, a.nota) AS nota_agrupada");
+    return $query;
+}
+
+function menor_nota($id_empresa) {
+    global $conn;
+    $query = $conn->query(
+
+        "SELECT 
+        MIN(nota) as menor_nota
+        FROM (
+        SELECT 
+            a.nota
+        FROM Avaliacao AS a
+        JOIN Empresa AS e ON a.id_empresa = e.id
+        WHERE e.id = $id_empresa
+        GROUP BY e.nome, a.nota) AS nota_agrupada");
+    return $query;
+}
+
+function nota_media($id_empresa) {
+    global $conn;
+    $query = $conn->query(
+
+        "SELECT 
+        nome_empresa,
+        SUM(nota * quantidade) / SUM(quantidade) AS media_ponderada
+
+        FROM (
+        SELECT 
+            e.nome AS nome_empresa,
+            a.nota,
+            COUNT(*) AS quantidade
+        FROM Avaliacao AS a
+        JOIN Empresa AS e ON a.id_empresa = e.id
+        WHERE e.id = $id_empresa
+        GROUP BY e.nome, a.nota
+
+        ) AS nota_agrupada
+
+");
+    return $query;
+}
