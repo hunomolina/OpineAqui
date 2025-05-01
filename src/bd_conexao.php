@@ -53,6 +53,7 @@ function select_avaliacoes($id_empresa) {
         LEFT JOIN Cliente AS c
         ON c.id = a.id_cliente
         WHERE a.id_empresa = $id_empresa
+        ORDER BY a.data_atendimento DESC
     ");
     return $query;
 }
