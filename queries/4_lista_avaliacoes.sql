@@ -1,18 +1,23 @@
 -- Lista avaliacoes de uma empresa num intervalo de tempo
-select 
-e.nome as empresa,
-date_format(a.data_atendimento, '%d/%m/%Y') as dt_atendimento,
-date_format(a.data_criacao, '%d/%m/%Y') as dt_criacao,
-c.nome as nome,
-a.nota as nota,
-a.comentario as comentario
-from Avaliacao as a
+USE opine_aqui;
 
-join Empresa as e 
-on a.id_empresa = e.id
+SET @id_empresa = 1;
+SET @data_inicio = "2025-01-01";
+SET @data_fim = "2025-12-31";
+SELECT 
+e.nome AS empresa,
+date_format(a.data_atendimento, '%d/%m/%Y') AS dt_atendimento,
+date_format(a.data_criacao, '%d/%m/%Y') AS dt_criacao,
+c.nome AS nome,
+a.nota AS nota,
+a.comentario AS comentario
+from Avaliacao AS a
 
-left join Cliente as c
-on a.id_cliente = c.id
+JOIN Empresa AS e 
+ON a.id_empresa = e.id
+
+LEFT JOIN Cliente as c
+ON a.id_cliente = c.id
 
 WHERE a.data_atendimento BETWEEN @data_inicio AND @data_fim
 AND e.id = @id_empresa
