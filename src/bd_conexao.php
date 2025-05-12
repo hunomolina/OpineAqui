@@ -209,7 +209,7 @@ function nota_media($id_empresa) {
 
         "SELECT 
         nome_empresa,
-        SUM(nota * quantidade) / SUM(quantidade) AS media_ponderada
+        ROUND(SUM(nota * quantidade) / SUM(quantidade),1) AS media_ponderada
 
         FROM (
         SELECT 
