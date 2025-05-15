@@ -16,7 +16,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">        
@@ -25,15 +25,23 @@ date_default_timezone_set('America/Sao_Paulo');
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>   
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="empresa_adicionar.php">Cadastrar</a>
+                    </li>   -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="empresa_logon.php">Login</a>
+                    </li>     -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
+                    </li>            
+                </ul>
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_adicionar.php">Cadastrar</a>
                     </li>  
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_logon.php">Login</a>
                     </li>    
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
-                    </li>            
                 </ul>
                 </div>    
             </div>        

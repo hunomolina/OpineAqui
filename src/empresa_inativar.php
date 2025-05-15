@@ -26,7 +26,7 @@ if (empty($_SESSION["empresa_id"])) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">        

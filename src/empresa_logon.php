@@ -16,7 +16,7 @@ session_start()
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">        
@@ -25,18 +25,26 @@ session_start()
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>   
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="empresa_adicionar.php">Cadastrar</a>
+                    </li>   -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="empresa_logon.php">Login</a>
+                    </li>     -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
+                    </li>            
+                </ul>
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_adicionar.php">Cadastrar</a>
                     </li>  
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_logon.php">Login</a>
                     </li>    
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
-                    </li>            
                 </ul>
                 </div>    
-            </div>        
+            </div>       
         </nav>
     </header>
 
@@ -59,6 +67,7 @@ session_start()
                                 <input type="password" class="form-control" name="empresa_senha" required>
                             </div>
                             <button type="submit" class="btn btn-primary" name="submit" value="Enviar">Enviar</button>
+                            <div id="mensagem_enviar"></div>
                         </form>
                     </div>
                 </div>    
@@ -71,16 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST["empresa_email"]) && isset($_POST["empresa_senha"]) ) {
 
         $logon_status = logon_empresa($_POST["empresa_email"], $_POST["empresa_senha"]);
-
+        echo "<script>
+                var mensagem = document.querySelector('#mensagem_enviar');
+              </script>";
         if ($logon_status) {
-            echo "Login realizado com sucesso! Você será redirecionado em instantes. <br><br>";
             echo "<script>
+                mensagem.innerHTML = '<br>Login efetuado com sucesso! Você será redirecionado em instantes';
                 setTimeout(function() {
                 window.location.href = 'empresa_dados.php'},3000);
                 </script>";
         }
         else {
-            echo "Login ou senha incorretos. Tente novamente.";
+            echo "<script>
+                mensagem.innerHTML = '<br>Login ou senha incorretos. Tente novamente.';
+                </script>";
         }
     }
 }

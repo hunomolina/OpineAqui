@@ -104,7 +104,7 @@ function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco) 
     global $conn;
     $query = $conn->query("SELECT id FROM Empresa WHERE cnpj = $cnpj OR email = '$email'");
     if ($query->num_rows > 0) {
-        echo "CNPJ ou e-mail já existentes na base. Faça o login.";
+        // echo "CNPJ ou e-mail já existentes na base. Faça o login.";
         return false;
     }
     $conn->query(

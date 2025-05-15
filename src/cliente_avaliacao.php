@@ -15,7 +15,7 @@ require_once 'bd_conexao.php';
 <body>
 <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">
@@ -122,9 +122,10 @@ require_once 'bd_conexao.php';
                         </div>
                     </div>
 
-                    <div class="me-5 pe-3 float-end">
-                        <label for="cliente_autorizacao_marketing">Autorização de marketing:</label>
+                    <div class="me-5 pe-3  float-end">
+                        <br>
                         <input type="checkbox" name="cliente_autorizacao_marketing" id="cliente_autorizacao_marketing" value=true>
+                        <label for="cliente_autorizacao_marketing">Autorizo o envio de e-mails com ofertas pela empresa avaliada</label>
                     </div>
 
                     <div class="mt-4 mb-2" style="padding-left: 200px;">

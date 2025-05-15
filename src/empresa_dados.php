@@ -24,7 +24,7 @@ if (empty($_SESSION["empresa_id"])) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">
@@ -36,9 +36,9 @@ if (empty($_SESSION["empresa_id"])) {
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_alterar.php">Alterar dados cadastrais</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -50,15 +50,15 @@ if (empty($_SESSION["empresa_id"])) {
         </nav>
     </header>
 
-    <div class="container shadow px-2 my-2 bg-body rounded">
+    <div class="container shadow px-2 my-2 bg-body rounded vh-100" style="max-height: calc(100vh - 150px);">
         <div class="row">
             <div class="d-flex justify-content-center logo-grande"><img src="../images/logo.png" alt="logo"></div>
             <hr> 
             <div class="col-12 text-center">
                 <h2>Avaliações da empresa: <? echo $_SESSION['empresa_nome']; ?></h2>    
-                <p>Envie este link para seus clientes avaliarem sua empresa: 
+                <p><br>Envie este link para seus clientes avaliarem sua empresa: 
                     <a href="<?php echo '/cliente_avaliacao.php?id=' . $_SESSION['empresa_id']; ?>" target="_blank"><?php echo $_SERVER['HTTP_HOST'] . '/cliente_avaliacao.php?id=' . $_SESSION['empresa_id']; ?></a>
-                </p>
+                </p><br>
 
                 <?php
                 $avaliacoes = select_avaliacoes($_SESSION['empresa_id']);
@@ -100,10 +100,11 @@ if (empty($_SESSION["empresa_id"])) {
                 </div>
 
                 <div class="container-fluid">
-                    <div class="table-responsive table-scroll" style="max-height: 360px; overflow-y: auto;">
+                    <div class="table-responsive overflow-auto" style="max-height: calc(100vh - 450px); width: 100%;">
                         <?php
                         if ($avaliacoes->num_rows > 0) {
-                            echo "<table class='table table-striped table-hover mt-4'>";
+                            echo "<div class= 'col h-100'>
+                                <table class='table table-striped table-hover mt-4'>";
                             echo "<tr>
                                     <th>Nome</th>
                                     <th>E-mail</th>
@@ -124,7 +125,7 @@ if (empty($_SESSION["empresa_id"])) {
                                 echo "<td>" . ($row["autorizacao_marketing"] ? 'Sim' : '') . "</td>";
                                 echo "</tr>";
                             }
-                            echo "</tr>";
+                            echo "</tr></table>";
                         } else {
                             echo "<div class='my-5'>Você ainda não possui avaliações.</div>";
                         }

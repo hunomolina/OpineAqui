@@ -17,7 +17,7 @@ session_start()
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">        
@@ -26,18 +26,26 @@ session_start()
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>   
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="empresa_adicionar.php">Cadastrar</a>
+                    </li>   -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="empresa_logon.php">Login</a>
+                    </li>     -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
+                    </li>            
+                </ul>
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_adicionar.php">Cadastrar</a>
                     </li>  
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_logon.php">Login</a>
                     </li>    
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
-                    </li>            
                 </ul>
                 </div>    
-            </div>        
+            </div>      
         </nav>
     </header>
 
@@ -87,6 +95,7 @@ session_start()
                             <div class="col-3">
                                 <button type="submit" class="btn btn-primary w-100" name="submit" value="Enviar">Enviar</button>
                             </div>
+                            <div id="mensagem_enviar"></div>
                         </div>
                     </form>
                 </div>
@@ -111,14 +120,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["empresa_endereco"]
         );
 
+
+        echo "<script>
+                var mensagem = document.querySelector('#mensagem_enviar');
+              </script>";
+
+
         if ($cadastro_status) {
-            echo "Cadastro realizado com sucesso! Você será redirecionado em instantes. <br><br>";
+            // echo "Cadastro realizado com sucesso! Você será redirecionado em instantes. <br><br>";
             echo "<script>
+                mensagem.innerHTML = '<br>Cadastro realizado com sucesso! Você será redirecionado em instantes.';
                 setTimeout(function() {
                 window.location.href = 'empresa_dados.php'},3000);
                 </script>";
         }
-        else {}
+        else {
+            echo "<script>
+                    mensagem.innerHTML = '<br><span style=\"display:block\; text-align:center\;\">CNPJ ou e-mail já existente na base. Faça o login.</span>';
+                </script>";
+        }
     }
 ?>
 

@@ -89,10 +89,10 @@ h6 {
   font-size: 1.6rem;
 }
 
-.table-scroll {
-  max-height: 280px !important;
+/* .table-scroll {
+  max-height: calc(100vh - 350px) !important;
   overflow-y: auto !important;
-}
+} */
 
 .footer-fixo {
   width: 100%;

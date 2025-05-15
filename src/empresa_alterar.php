@@ -25,21 +25,21 @@ if (empty($_SESSION["empresa_id"])) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="../images/logo.png" alt="logo" class="logo">
             </a>
             <div class="container-fluid">        
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="empresa_dados.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="empresa_dados.php">Avaliações da empresa</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="cliente_avaliacao.php">Avalie uma empresa</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -117,6 +117,7 @@ if (empty($_SESSION["empresa_id"])) {
 
                                 <button type="submit" class="btn btn-primary" name="submit" value="Enviar">Enviar</button>
                             </form>
+                            <div id="mensagem_enviar"></div>
                         </div>
                     </div>                    
                 </div>
@@ -141,14 +142,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         );
 
+        echo "<script>
+                var mensagem = document.querySelector('#mensagem_enviar');
+              </script>";
+
+
         if ($cadastro_status) {
-            echo "Alteração realizado com sucesso! Você será redirecionado em instantes. <br><br>";
+            // echo "Alteração realizado com sucesso! Você será redirecionado em instantes. <br><br>";
             echo "<script>
+            mensagem.innerHTML = '<br>Alteração realizado com sucesso! Você será redirecionado em instantes. <br><br>';
                 setTimeout(function() {
                 window.location.href = 'empresa_dados.php'},3000);
                 </script>";
         }
-        else {}
+        else {
+            echo "<script>
+                    mensagem.innerHTML = '<br>Falha na alteração. Tente novamente.</span>';
+                </script>";
+        }
     }
 ?>
 
