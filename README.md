@@ -1,6 +1,15 @@
 # OpineAqui
 Plataforma de pesquisa de opinião com consumidores de pequenos negócios
 
+## Descrição
+A plataforma permite que empresas se cadastrem para que seus clientes possam realizar avaliações de seus produtos e serviços. 
+
+As avaliações consistem na indicação de uma nota (0-10) e de uma observação a respeito do produto ou serviço. A identificação do cliente não é obrigatória e aqueles que se identificarem poderão optar por se inscrever em programa de marketing.
+
+Os clientes podem realizar as avaliações por link específico gerado pela empresa, caso em que não será necessário identificá-la, ou acessando a homepage do OpineAqui. 
+
+As empresas, uma vez logadas, terão acesso às avaliações feitas, bem como aos valores de nota média, máxima e mínima.
+
 ## Stack tecnológico
 - MariaDB - banco de dados
 - PHPMyAdmin - visualização e administração do banco de dados
