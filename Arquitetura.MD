@@ -78,21 +78,15 @@ Botão → Realiza POST do formulário para backend
 
 **Empresa - cadastro:**
 
-- CNPJ (int)
+- CNPJ (char)
+- Data de alteração (date)
+- Data de criação (date)
+- Descrição (char)
 - E-mail (char)
-- Nome conhecido na região (char)
-- Descrição da atividade (char)
+- Endereço (char)
+- Nome (char)
 - Senha (char)
-- Razão social (API CNPJ)
-- Endereço (API CNPJ)
-    - cep (int)
-    - logradouro (char)
-    - número (int)
-    - bairro (char)
-    - cidade (char)
-    - uf (char)
-- Atividade principal (API CNPJ)
-- Data de cadastro (anotado pelo sistema)
+- Status (boolean)
 
 ### BASE SQL
 
@@ -102,6 +96,7 @@ Botão → Realiza POST do formulário para backend
 - email - varchar/NULLABLE
 - nome - varchar/NULLABLE
 - celular - int/NULLABLE
+- Data_cadastro - date
 - autorizacao_marketing - boolean
 
 **Avaliação**
@@ -121,15 +116,9 @@ Botão → Realiza POST do formulário para backend
 - nome - varchar
 - descricao - varchar
 - senha - varchar
-- razao_social - varchar
 - endereço - varchar
-- atividade - varchar
 - Data_cadastro - date
 - ativa - boolean #se ativa no cadastro OpineAqui
 - data de inativação - date
 
-### Recursos úteis
 
-- API CNPJ  → GET https://publica.cnpj.ws/cnpj/46392072000122
-- API CORREIOS → GET https://viacep.com.br/ws/01228000/json/
-- ERP → [QuickDBD](https://app.quickdatabasediagrams.com/#/)
