@@ -1,0 +1,19 @@
+
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+# Cor de fundo principal
+backgroundColor = "#ffffff"
+# Cor de fundo dos widgets/elementos laterais (sidebar)
+secondaryBackgroundColor = "#f5f5f5" 
+# Cor principal dos textos e elementos
+textColor = "#333333" 
+# Cor principal da marca/links
+primaryColor = "#0d6efd"
+# .streamlit/config.toml
+
+[global]
+# Garante que o Streamlit use a largura máxima
+layout = "wide"

@@ -115,97 +115,46 @@ def get_user_data_from_mariadb(user_id_to_filter):
 st.header(f"📈 Sales Dashboard for User: {current_session_id}")
 
 # Call the cached function with the stable ID
-dashboard_data = get_user_data_from_mariadb(current_session_id)
 
-if not dashboard_data.empty:
-    st.success(f"Successfully loaded {len(dashboard_data)} records.")
-    # Display Data Table
-    st.dataframe(dashboard_data)
+
+
+
+# 1. Carregar Dados Filtrados
+df_avaliacoes = get_user_data_from_mariadb(st.session_state['user_id'])
+
+if not df_avaliacoes.empty:
+    
+    # 2. Exibir KPIs
+    st.header("Resumo de Desempenho")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Média Geral", f"{df_avaliacoes['nota'].mean():.2f}")
+    col2.metric("Maior Nota", df_avaliacoes['nota'].max())
+    col3.metric("Total de Reviews", len(df_avaliacoes))
+
+    st.markdown("---")
+    
+    # 3. Plot da Média Móvel (Séries Temporais)
+    st.subheader("Satisfação ao Longo do Tempo")
+    
+    # Configurar os dados para plotagem (calculando a média diária e média móvel)
+    df_plot = df_avaliacoes.copy()
+    df_plot['data'] = pd.to_datetime(df_plot['data_atendimento'])
+    df_tendencia = df_plot.set_index('data')['nota'].resample('D').mean().fillna(method='ffill')
+    df_tendencia = df_tendencia.rolling(window=7).mean() # Média Móvel de 7 dias
+
+    st.line_chart(df_tendencia)
+    
+    st.markdown("---")
+
+    # 4. Distribuição de Notas
+    st.subheader("Frequência de Notas")
+    nota_counts = df_avaliacoes['nota'].value_counts().sort_index()
+    st.bar_chart(nota_counts)
+
+    st.markdown("---")
+    
+    # 5. Tabela de Avaliações Recentes
+    st.subheader("Últimas Avaliações")
+    st.dataframe(df_avaliacoes.tail(10)) 
 else:
     st.warning(f"No personalized data found for User ID {current_session_id}.")
-
-df_aval = dashboard_data
-df_aval["data_atendimento"] = df_aval["data_atendimento"].dt.strftime("%d/%m/%Y")
-#df_aval["dt_criacao"] = df_aval["dt_criacao"].dt.strftime("%d/%m/%Y")
-#df_aval["nome"] = df_aval["nome"].fillna("Não informado")
-
-#df_notas = pd.read_excel("./queries/dados_dummy.xlsx", sheet_name="notas")
-#df_notas["dt_atendimento"] = df_notas["dt_atendimento"].dt.strftime("%d/%m/%Y")
-#df_notas["dt_criacao"] = df_notas["dt_criacao"].dt.strftime("%d/%m/%Y")
-#df_notas["produto"] = df_notas["nota"] * df_notas["quantidade"]
-
-
-st.title("Dashboard de Avaliações")
-st.divider()
-
-col1, col2 = st.columns(2)
-with col1:
-    empresas = df_notas["empresa"].unique().tolist()
-    opcoes = st.selectbox("Escolha uma empresa", empresas)
-
-with col2:
-    atendimento = df_notas["dt_atendimento"].unique().tolist()
-    atendimento.sort()
-
-    star_date, end_date = st.select_slider(
-        "Selecione um intervalo de datas",
-        options=atendimento,
-        value=(atendimento[0], atendimento[-1]),
-    )
-
-nota_ponderada = (
-    df_notas.loc[
-        (df_notas["empresa"] == opcoes)
-        & (df_notas["dt_atendimento"].between(star_date, end_date)),
-        "produto",
-    ].sum()
-    / df_notas.loc[
-        (df_notas["empresa"] == opcoes)
-        & (df_notas["dt_atendimento"].between(star_date, end_date)),
-        "quantidade",
-    ].sum()
-)
-
-total_aval = df_notas.loc[
-    (df_notas["empresa"] == opcoes)
-    & (df_notas["dt_atendimento"].between(star_date, end_date)),
-    "quantidade",
-].sum()
-
-nota_max = df_notas.loc[
-    (df_notas["empresa"] == opcoes)
-    & (df_notas["dt_atendimento"].between(star_date, end_date)),
-    "nota",
-].max()
-
-nota_min = df_notas.loc[
-    (df_notas["empresa"] == opcoes)
-    & (df_notas["dt_atendimento"].between(star_date, end_date)),
-    "nota",
-].min()
-
-col3, col4, col5, col6 = st.columns(4)
-col3.metric(label="Nota média", value=f"{nota_ponderada:.1f}", border=True)
-col4.metric(label="Maior nota", value=f"{nota_max:.1f}", border=True)
-col5.metric(label="Menor nota", value=f"{nota_min:.1f}", border=True)
-col6.metric(label="Total de avaliações", value=total_aval, border=True)
-
-st.divider()
-st.subheader(f"Últimas 10 avaliações")
-
-df_exibicao = df_aval[["dt_atendimento", "nota", "nome", "comentario"]].rename(
-    columns={
-        "dt_atendimento": "Data do Atendimento",
-        "nota": "Nota",
-        "nome": "Nome do Cliente",
-        "comentario": "Comentário",
-    }
-)
-
-st.dataframe(
-    df_exibicao.loc[
-        (df_aval["empresa"] == opcoes)
-        & (df_aval["dt_atendimento"].between(star_date, end_date))
-    ].head(10),
-    hide_index=True,
-)
