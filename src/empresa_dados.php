@@ -99,10 +99,9 @@ if (empty($_SESSION["empresa_id"])) {
                     </div>
                 </div>
                             <iframe
-  src="http://localhost:8501/?embed=true"
-  style="height: 450px; width: 100%;"
+    src="http://localhost:8501/?embed=true&user_id=<?php echo $_SESSION['empresa_id'];?>"
+    style="height: 450px; width: 100%;"
 ></iframe>
-
                 <div class="container-fluid">
                     <div class="table-responsive overflow-auto" style="max-height: calc(100vh - 450px); width: 100%;">
                         <?php
