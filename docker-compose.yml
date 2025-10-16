@@ -43,6 +43,20 @@ services:
       - "80"
     restart: unless-stopped
     command: bash -c "a2enmod rewrite && docker-php-ext-install mysqli pdo_mysql pdo && apache2-foreground"
-
+  streamlit-app:
+    build:
+      context: . 
+      dockerfile: Dockerfile.streamlit 
+    ports:
+      - "8501:8501" 
+    depends_on:
+      - db
+    # --- CRITICAL VOLUME LINE ---
+    volumes:
+      - ./streamlit_app:/app  # <-- Maps local 'streamlit_app' to container's '/app' for live code changes
+    # ---------------------------
+    environment:
+      PYTHONUNBUFFERED: 1 
+    restart: unless-stopped
 volumes:
   db_data:

@@ -34,19 +34,105 @@ Uso:
     - Interaja com o dropdown e o slider para filtrar e visualizar os dados dinamicamente.
 """
 
-import pandas as pd
-
 import streamlit as st
+import pandas as pd
+import mysql.connector # Use the official MySQL connector which is compatible with MariaDB
 
-df_aval = pd.read_excel("./queries/dados_dummy.xlsx", sheet_name="aval")
-df_aval["dt_atendimento"] = df_aval["dt_atendimento"].dt.strftime("%d/%m/%Y")
-df_aval["dt_criacao"] = df_aval["dt_criacao"].dt.strftime("%d/%m/%Y")
-df_aval["nome"] = df_aval["nome"].fillna("Não informado")
+# --- A. Session State Management ---
 
-df_notas = pd.read_excel("./queries/dados_dummy.xlsx", sheet_name="notas")
-df_notas["dt_atendimento"] = df_notas["dt_atendimento"].dt.strftime("%d/%m/%Y")
-df_notas["dt_criacao"] = df_notas["dt_criacao"].dt.strftime("%d/%m/%Y")
-df_notas["produto"] = df_notas["nota"] * df_notas["quantidade"]
+if 'user_id' not in st.session_state:
+    st.session_state['user_id'] = None
+    
+current_session_id = st.session_state['user_id']
+new_id_from_url = st.query_params.get("user_id", [None])[0]
+
+# Logic to handle initial login/redirect and set the stable session ID
+if new_id_from_url and new_id_from_url != str(current_session_id):
+    try:
+        new_user_id = int(new_id_from_url)
+        st.session_state['user_id'] = new_user_id
+        st.query_params.clear() 
+        st.rerun()
+    except ValueError:
+        st.error("Invalid 'user_id' format in the URL.")
+        st.stop()
+        
+# Block unauthenticated access
+if current_session_id is None:
+    st.warning("Dashboard access requires a user ID from the login page.")
+    st.stop()
+    
+# --- B. MariaDB Query Function with Caching ---
+
+# Caching is crucial. The function runs only once per unique user ID per hour.
+@st.cache_data(ttl=3600, show_spinner="Querying MariaDB for personalized data...")
+def get_user_data_from_mariadb(user_id_to_filter):
+    """Connects to MariaDB, executes a filtered query, and returns a DataFrame."""
+    
+    # 1. Establish connection using st.secrets
+    try:
+        conn = mysql.connector.connect(
+            host=st.secrets["mariadb"]["host"],
+            port=st.secrets["mariadb"]["port"],
+            database=st.secrets["mariadb"]["database"],
+            user=st.secrets["mariadb"]["user"],
+            password=st.secrets["mariadb"]["password"]
+        )
+    except Exception as e:
+        st.error(f"Failed to connect to MariaDB. Check your .streamlit/secrets.toml. Error: {e}")
+        return pd.DataFrame()
+
+    # 2. Define the Query with Parameterization
+    # Always use parameterized queries (placeholders) to prevent SQL Injection attacks.
+    query = """
+            SELECT 
+                a.data_atendimento,
+                a.comentario,
+                a.nota
+            FROM Avaliacao AS a
+            INNER JOIN Empresa AS e ON a.id_empresa = e.id
+            WHERE a.data_atendimento BETWEEN "2025-01-01" AND "2025-12-31"
+            AND e.id = %s   
+    """
+    
+    # 3. Execute the query and load results into a DataFrame
+    try:
+        # Use pandas.read_sql for a simple and efficient way to query to DataFrame
+        # The params argument securely passes the user_id to the query.
+        df = pd.read_sql(query, conn, params=(user_id_to_filter,))
+        return df
+    
+    except Exception as e:
+        st.error(f"Error executing MariaDB query: {e}")
+        return pd.DataFrame()
+    finally:
+        # 4. Close the connection
+        if conn.is_connected():
+            conn.close()
+
+# --- C. Display Dashboard ---
+
+st.header(f"📈 Sales Dashboard for User: {current_session_id}")
+
+# Call the cached function with the stable ID
+dashboard_data = get_user_data_from_mariadb(current_session_id)
+
+if not dashboard_data.empty:
+    st.success(f"Successfully loaded {len(dashboard_data)} records.")
+    # Display Data Table
+    st.dataframe(dashboard_data)
+else:
+    st.warning(f"No personalized data found for User ID {current_session_id}.")
+
+df_aval = dashboard_data
+df_aval["data_atendimento"] = df_aval["data_atendimento"].dt.strftime("%d/%m/%Y")
+#df_aval["dt_criacao"] = df_aval["dt_criacao"].dt.strftime("%d/%m/%Y")
+#df_aval["nome"] = df_aval["nome"].fillna("Não informado")
+
+#df_notas = pd.read_excel("./queries/dados_dummy.xlsx", sheet_name="notas")
+#df_notas["dt_atendimento"] = df_notas["dt_atendimento"].dt.strftime("%d/%m/%Y")
+#df_notas["dt_criacao"] = df_notas["dt_criacao"].dt.strftime("%d/%m/%Y")
+#df_notas["produto"] = df_notas["nota"] * df_notas["quantidade"]
 
 
 st.title("Dashboard de Avaliações")

@@ -98,6 +98,10 @@ if (empty($_SESSION["empresa_id"])) {
                         </div>
                     </div>
                 </div>
+                            <iframe
+  src="http://localhost:8501/?embed=true"
+  style="height: 450px; width: 100%;"
+></iframe>
 
                 <div class="container-fluid">
                     <div class="table-responsive overflow-auto" style="max-height: calc(100vh - 450px); width: 100%;">
