@@ -50,7 +50,7 @@ if (empty($_SESSION["empresa_id"])) {
         </nav>
     </header>
 
-    <div class="container shadow my-2 bg-body rounded vh-100" style="max-height: calc(100vh - 150px);">
+    <div class="container shadow px-2 my-2 bg-body rounded" >
         <div class="row">
             <div class="d-flex justify-content-center logo-grande"><img src="../images/logo.png" alt="logo"></div>
             <hr> 
