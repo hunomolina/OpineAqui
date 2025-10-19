@@ -126,11 +126,37 @@ if not df_avaliacoes.empty:
     
     # 2. Exibir KPIs
     st.header("Resumo de Desempenho")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Média Geral", f"{df_avaliacoes['nota'].mean():.2f}")
+    col1, col2, col3, col4, col5 = st.columns(5)
+    
+    # Calculate metrics
+    media_geral = df_avaliacoes['nota'].mean()
+
+    promoters = len(df_avaliacoes[df_avaliacoes['nota'] >= 9])
+    detractors = len(df_avaliacoes[df_avaliacoes['nota'] <= 6])
+    total_responses = len(df_avaliacoes)
+    
+    if total_responses > 0:
+        nps_score = ((promoters - detractors) / total_responses) * 100
+    else:
+        nps_score = 0.0
+    
+    col1.metric("Média Geral", f"{media_geral:.2f}")
     col2.metric("Maior Nota", df_avaliacoes['nota'].max())
     col3.metric("Total de Reviews", len(df_avaliacoes))
+    col4.metric("NPS", f"{nps_score:.0f}%")
 
+    with col5:
+        if nps_score >= 75:
+            st.badge("Excelência", icon="❤️", color="red")
+        elif nps_score >= 50:
+            st.badge("Muito bom", icon=":material/check:", color="green")
+        elif nps_score >= 20:
+            st.markdown(":orange-badge[⚠️ Atenção]"
+        )  
+        else:
+            st.markdown(":red-badge[❌ Crítico]")    
+
+    
     st.markdown("---")
     
     # 3. Plot da Média Móvel (Séries Temporais)
