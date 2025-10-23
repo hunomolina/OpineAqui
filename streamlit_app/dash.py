@@ -86,6 +86,7 @@ def get_user_data_from_mariadb(user_id_to_filter):
     # Always use parameterized queries (placeholders) to prevent SQL Injection attacks.
     query = """
             SELECT 
+                e.nome,
                 a.data_atendimento,
                 a.comentario,
                 a.nota
@@ -112,7 +113,7 @@ def get_user_data_from_mariadb(user_id_to_filter):
 
 # --- C. Display Dashboard ---
 
-st.header(f"📈 Sales Dashboard for User: {current_session_id}")
+
 
 # Call the cached function with the stable ID
 
@@ -121,7 +122,7 @@ st.header(f"📈 Sales Dashboard for User: {current_session_id}")
 
 # 1. Carregar Dados Filtrados
 df_avaliacoes = get_user_data_from_mariadb(st.session_state['user_id'])
-
+st.header(f"📈 Dashboard  {df_avaliacoes['nome'][0]}")
 if not df_avaliacoes.empty:
     
     # 2. Exibir KPIs
@@ -160,7 +161,7 @@ if not df_avaliacoes.empty:
     st.markdown("---")
     
     # 3. Plot da Média Móvel (Séries Temporais)
-    st.subheader("Satisfação ao Longo do Tempo")
+    st.subheader("Média movel das avaliações(7 dias) por dia da semana)")
     
     # Configurar os dados para plotagem (calculando a média diária e média móvel)
     df_plot = df_avaliacoes.copy()
@@ -175,12 +176,12 @@ if not df_avaliacoes.empty:
     # 4. Distribuição de Notas
     st.subheader("Frequência de Notas")
     nota_counts = df_avaliacoes['nota'].value_counts().sort_index()
-    st.bar_chart(nota_counts)
+    st.bar_chart(nota_counts, horizontal =True)
 
     st.markdown("---")
     
     # 5. Tabela de Avaliações Recentes
     st.subheader("Últimas Avaliações")
-    st.dataframe(df_avaliacoes.tail(10)) 
+    st.table(df_avaliacoes.tail(10)) 
 else:
     st.warning(f"No personalized data found for User ID {current_session_id}.")
