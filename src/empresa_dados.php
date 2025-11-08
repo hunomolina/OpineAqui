@@ -99,7 +99,7 @@ if (empty($_SESSION["empresa_id"])) {
                     </div>
                 </div> -->
                  <iframe
-    src="http://localhost:8501/?embed=true&user_id=<?php echo $_SESSION['empresa_id'];?>"
+    src="/api-streamlit/?embed=true&user_id=<?php echo $_SESSION['empresa_id'];?>"
     frameborder="0"
     scrolling="no"
     style="

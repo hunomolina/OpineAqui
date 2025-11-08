@@ -42,7 +42,7 @@ services:
     expose:
       - "80"
     restart: unless-stopped
-    command: bash -c "a2enmod rewrite && docker-php-ext-install mysqli pdo_mysql pdo && apache2-foreground"
+    command: bash -c "a2enmod rewrite proxy proxy_http proxy_wstunnel && docker-php-ext-install mysqli pdo_mysql pdo && apache2-foreground"
   streamlit-app:
     build:
       context: . 
