@@ -1,107 +1,559 @@
+html {
+  /* Permitir zoom até 200% sem quebrar layout */
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f5 !important;
-  font-family: Arial, sans-serif;
-  line-height: 1.2;
+  
+  /* Contraste adequado: #f5f5f5 sobre texto escuro */
+  background-color: #f5f5f5;
+  
+  /* Fonte legível e acessível */
+  font-family: Arial, Helvetica, sans-serif;
+  
+  /* Espaçamento de linha para melhor legibilidade (WCAG 1.4.12) */
+  line-height: 1.5;
+  
+  /* Tamanho de fonte base */
+  font-size: 1rem;
+  
+  /* Cor de texto com contraste adequado */
+  color: #212529;
 }
 
-/* .container {
-  flex: 1;
-} */
+/* ===================================
+   CONTAINER PRINCIPAL
+   =================================== */
 
+.container {
+  flex: 1;
+  padding: 1rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ===================================
+   LOGOS E IMAGENS
+   =================================== */
+
+/* Logo padrão - com dimensões explícitas para performance */
 .logo {
   height: 60px;
   width: 60px;
   margin-left: 12px;
-  /* padding-right: -59px; */
   border-radius: 10%;
+  
+  /* Garantir que a imagem não seja distorcida */
+  object-fit: contain;
+  
+  /* Performance: carregamento lazy */
+  loading: lazy;
 }
 
+/* Logo grande - responsivo */
 .logo-grande img {
   width: 100px;
-  margin-left: 0px;
-  padding-right: -16px;
+  max-width: 100%;
+  height: auto;
+  margin-left: 0;
   border-radius: 0 10% 10% 0;
+  
+  /* Garantir que a imagem não seja distorcida */
+  object-fit: contain;
 }
 
+/* ===================================
+   FORMULÁRIOS ACESSÍVEIS
+   =================================== */
+
+/* Checkboxes e radio buttons com tamanho adequado (mínimo 44x44px - WCAG 2.5.5) */
 .form-check-input {
-  width: 1.5em !important;
-  height: 1.5em !important;
+  width: 1.5em;
+  height: 1.5em;
+  
+  /* Garantir área de toque mínima no mobile */
+  min-width: 44px;
+  min-height: 44px;
+  
+  /* Cursor pointer para indicar interatividade */
+  cursor: pointer;
 }
 
+/* Ajuste de margem para checkboxes */
 .form-check .form-check-input {
-  /* float: left; */
-  margin-left: -17px !important;
+  margin-left: 0;
+  margin-right: 0.5rem;
 }
+
+/* Labels de formulário com contraste adequado */
+.form-check-label,
+.form-label {
+  /* Garantir contraste mínimo 4.5:1 */
+  color: #212529;
+  
+  /* Cursor pointer para indicar que o label é clicável */
+  cursor: pointer;
+  
+  /* Espaçamento adequado */
+  padding: 0.25rem 0;
+  
+  /* Área de toque adequada */
+  display: inline-block;
+}
+
+/* Foco visível em campos de formulário (WCAG 2.4.7) */
+.form-check-input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Estado disabled com indicação visual clara */
+.form-check-input:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===================================
+   TEXTAREA RESPONSIVA
+   =================================== */
 
 .div-textarea textarea {
   height: 70px;
-  width: 60em;
-  max-width: 100%;
+  width: 100%;
+  max-width: 60em;
   border-radius: 5px;
+  
+  /* Padding para melhor usabilidade */
+  padding: 0.75rem;
+  
+  /* Fonte legível */
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  
+  /* Borda com contraste adequado */
+  border: 1px solid #ced4da;
+  
+  /* Permitir redimensionamento apenas vertical */
+  resize: vertical;
 }
 
+/* ===================================
+   UTILITÁRIOS DE VISIBILIDADE
+   =================================== */
+
+/* Esconder elementos visualmente mas manter para leitores de tela */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Esconder completamente (não acessível) */
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-.btn-light:hover {
-  color: #f8f9fa !important;
-  background-color: #0d6efd !important;
+/* ===================================
+   BOTÕES ACESSÍVEIS
+   =================================== */
+
+/* Botões com área de toque adequada (mínimo 44x44px - WCAG 2.5.5) */
+.btn,
+button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1rem;
+  
+  /* Cursor pointer para indicar interatividade */
+  cursor: pointer;
+  
+  /* Fonte legível */
+  font-size: 1rem;
+  line-height: 1.5;
+  
+  /* Transição suave para hover/focus */
+  transition: background-color 0.15s ease-in-out, 
+              border-color 0.15s ease-in-out, 
+              color 0.15s ease-in-out;
 }
 
+/* Botão light com hover acessível */
+.btn-light {
+  /* Contraste adequado no estado padrão */
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #ced4da;
+}
+
+.btn-light:hover,
+.btn-light:focus {
+  /* Contraste 4.5:1 no hover */
+  background-color: #0d6efd;
+  color: #ffffff;
+  border-color: #0d6efd;
+}
+
+/* Botão selecionado com indicação visual clara */
 .btn-selected {
-  background-color: #007bff !important; /* Cor azul */
-  color: white !important; /* Texto branco */
-  border-color: #007bff !important; /* Borda azul */
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #007bff;
+  
+  /* Indicador adicional para leitores de tela */
+  position: relative;
 }
+
+.btn-selected::after {
+  content: " (selecionado)";
+  /* Esconder visualmente mas manter para leitores de tela */
+  position: absolute;
+  left: -9999px;
+}
+
+/* Foco visível em botões (WCAG 2.4.7) */
+.btn:focus,
+button:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+}
+
+/* Estado disabled em botões */
+.btn:disabled,
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===================================
+   LINKS ACESSÍVEIS
+   =================================== */
 
 a {
-  color: #000;
-
-  &:hover {
-    color: #000;
-  }
+  /* Cor com contraste adequado (mínimo 4.5:1) */
+  color: #0d6efd;
+  
+  /* Sublinhado para diferenciar de texto normal (WCAG 1.4.1) */
+  text-decoration: underline;
+  
+  /* Cursor pointer */
+  cursor: pointer;
+  
+  /* Transição suave */
+  transition: color 0.15s ease-in-out;
 }
 
-.empresa-avaliada {
-  border: 1px solid #007bff !important; /* Borda azul */
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+a:hover,
+a:focus {
+  /* Cor diferente no hover mantendo contraste */
+  color: #0a58ca;
+  text-decoration: underline;
 }
 
+/* Foco visível em links (WCAG 2.4.7) */
+a:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Links visitados com cor distinta (WCAG 1.4.1) */
+a:visited {
+  color: #6610f2;
+}
+
+/* ===================================
+   TIPOGRAFIA ACESSÍVEL
+   =================================== */
+
+/* Cabeçalhos com contraste adequado */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: #25304c !important;
+  /* Cor com contraste mínimo 4.5:1 */
+  color: #25304c;
+  
+  /* Espaçamento para melhor legibilidade */
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  
+  /* Line height adequado */
+  line-height: 1.3;
+  
+  /* Font weight para hierarquia visual */
+  font-weight: 600;
 }
 
+/* Tamanhos de fonte responsivos */
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+/* ===================================
+   ELEMENTOS ESPECÍFICOS
+   =================================== */
+
+/* Label de empresa com contraste e tamanho adequados */
 .label-empresa {
-  color: #25304c !important;
-  font-size: 1.6rem;
+  color: #25304c;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-/* .table-scroll {
-  max-height: calc(100vh - 350px) !important;
-  overflow-y: auto !important;
-} */
+/* Empresa avaliada com destaque visual acessível */
+.empresa-avaliada {
+  /* Borda com contraste adequado */
+  border: 2px solid #007bff;
+  
+  /* Tamanho de fonte responsivo */
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
+  
+  /* Espaçamento */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  
+  /* Background com contraste */
+  background-color: #e7f1ff;
+  color: #003d82;
+  
+  /* Arredondamento */
+  border-radius: 0.5rem;
+}
+
+/* ===================================
+   FOOTER ACESSÍVEL
+   =================================== */
 
 .footer-fixo {
   width: 100%;
-  position: fixed;
-  background-color: #f8f9fa;
+  
+  /* Footer fixo pode causar problemas de sobreposição - usar com cautela */
+  position: relative;
+  
+  /* Background com contraste adequado */
+  background-color: #212529;
+  color: #ffffff;
+  
+  /* Centralização */
   text-align: center;
-  font-size: smaller;
-  bottom: 0;
-  margin: 0;
+  
+  /* Tamanho de fonte legível */
+  font-size: 0.875rem;
+  
+  /* Espaçamento */
+  padding: 1rem;
+  margin-top: auto;
+  
+  /* Garantir que o footer fique no final */
+  flex-shrink: 0;
+}
+
+/* Links no footer com contraste adequado */
+.footer-fixo a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-fixo a:hover,
+.footer-fixo a:focus {
+  color: #e9ecef;
+  text-decoration: underline;
+}
+
+/* ===================================
+   RESPONSIVIDADE E ZOOM
+   =================================== */
+
+/* Garantir que elementos sejam redimensionáveis até 200% (WCAG 1.4.4) */
+@media (max-width: 768px) {
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .logo-grande img {
+    width: 80px;
+  }
+  
+  .div-textarea textarea {
+    max-width: 100%;
+  }
+  
+  /* Aumentar área de toque em dispositivos móveis */
+  .btn,
+  button,
+  .form-check-input {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) {
+  html {
+    font-size: 100%;
+  }
+  
+  .container {
+    padding: 0.75rem;
+  }
+}
+
+/* Responsividade para desktop grande */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+/* ===================================
+   PREFERÊNCIAS DO USUÁRIO
+   =================================== */
+
+/* Modo de alto contraste (WCAG 1.4.3) */
+@media (prefers-contrast: high) {
+  body {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  a {
+    color: #0000ee;
+    text-decoration: underline;
+  }
+  
+  a:visited {
+    color: #551a8b;
+  }
+  
+  .btn-light {
+    border: 2px solid #000000;
+  }
+  
+  .footer-fixo {
+    background-color: #000000;
+    color: #ffffff;
+    border-top: 2px solid #ffffff;
+  }
+}
+
+/* Modo escuro (preferência do sistema) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #e9ecef;
+  }
+  
+  a {
+    color: #66b3ff;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #e9ecef;
+  }
+  
+  .label-empresa {
+    color: #e9ecef;
+  }
+  
+  .empresa-avaliada {
+    background-color: #2c3e50;
+    color: #66b3ff;
+    border-color: #66b3ff;
+  }
+}
+
+/* Reduzir movimento para usuários com preferência (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===================================
+   ESTADOS DE FOCO PERSONALIZADOS
+   =================================== */
+
+/* Foco visível global para todos os elementos interativos */
+*:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* Remover outline padrão do navegador apenas se substituído */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Foco visível apenas para navegação por teclado */
+*:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* ===================================
+   ACESSIBILIDADE PARA IMPRESSÃO
+   =================================== */
+
+@media print {
+  /* Garantir que links sejam visíveis na impressão */
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  /* Esconder elementos desnecessários na impressão */
+  .footer-fixo,
+  .navbar,
+  button {
+    display: none;
+  }
+  
+  /* Garantir contraste na impressão */
+  body {
+    background: white;
+    color: black;
+  }
 }
 
 /* @media (max-width: 1440px) {
