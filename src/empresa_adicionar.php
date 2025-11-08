@@ -142,5 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 ?>
 
+    <script src="consultar_cnpj.js"></script>
 </body>
 </html>
