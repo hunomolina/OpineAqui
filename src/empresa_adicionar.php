@@ -13,12 +13,41 @@ session_start()
     <!-- Bootstrap e CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
+    <style>
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            z-index: -999;
+        }
+        .skip-link:focus, .skip-link:active {
+            color: #fff;
+            background-color: #000;
+            left: auto;
+            top: auto;
+            width: auto;
+            height: auto;
+            overflow: auto;
+            padding: 10px;
+            z-index: 999;
+            text-decoration: none;
+        }
+    </style>
 </head>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    <-- inseri <a para compliance da lei de acessibilidade-->
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a href="index.php">
-                <img src="../images/logo.png" alt="logo" class="logo">
+                <img src="../images/logo.png" alt="OpineAqui" class="logo">
+                <--inserido alt="OpineAqui" class="logo" para compliance com acessibilidade-->
             </a>
             <div class="container-fluid">        
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -103,7 +132,8 @@ session_start()
         </div>
     </div>
 
-    <!-- <footer class="footer-fixo">
+    <!-- <footer class="footer-fixo" role="contentinfo">
+        <--inserido role="contentinfo" para compliance da lei de acessibilidade-->
             <p>&copy; <span id="anoAtual"></span> Projeto Integrador - UNIVESP. Todos os direitos reservados.</p>
     </footer> -->
 
