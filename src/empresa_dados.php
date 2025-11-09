@@ -50,7 +50,7 @@ if (empty($_SESSION["empresa_id"])) {
         </nav>
     </header>
 
-    <div class="container shadow px-2 my-2 bg-body rounded vh-100" style="max-height: calc(100vh - 150px);">
+    <div class="container shadow px-2 my-2 bg-body rounded" >
         <div class="row">
             <div class="d-flex justify-content-center logo-grande"><img src="../images/logo.png" alt="logo"></div>
             <hr> 
@@ -64,7 +64,7 @@ if (empty($_SESSION["empresa_id"])) {
                 $avaliacoes = select_avaliacoes($_SESSION['empresa_id']);
                 ?>
                 
-                <div class="container">
+                <!-- <div class="container">
                     <div class="row d-flex justify-content-center gap-5 text-center">
                         <div class="col-12 col-md-3 shadow-sm" style="background-color:#0d6efd; border-radius: 5px; padding: 5px; margin-bottom: 10px; color: #f0f0f0;">
                             <?php
@@ -97,9 +97,19 @@ if (empty($_SESSION["empresa_id"])) {
                             ?>
                         </div>
                     </div>
-                </div>
-
-                <div class="container-fluid">
+                </div> -->
+                 <iframe
+    src="/api-streamlit/?embed=true&user_id=<?php echo $_SESSION['empresa_id'];?>"
+    frameborder="0"
+    scrolling="no"
+    style="
+        height: 2000px; /* Ajuste a altura conforme o seu dashboard */
+        width: 100%;
+        border: none;
+        overflow: hidden; 
+    "
+></iframe>
+                <!-- <div class="container-fluid">
                     <div class="table-responsive overflow-auto" style="max-height: calc(100vh - 450px); width: 100%;">
                         <?php
                         if ($avaliacoes->num_rows > 0) {
@@ -131,7 +141,7 @@ if (empty($_SESSION["empresa_id"])) {
                         }
                         ?>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

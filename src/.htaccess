@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# ----------------------------------------------------------------------
+# REGRA PARA WEBSOCKETS
+# ----------------------------------------------------------------------
+# Condição: Verifica se o cliente está a pedir um "Upgrade" para "websocket"
+RewriteCond %{HTTP:Upgrade} websocket [NC]
+
+# Regra (se a condição for verdadeira):
+# Faz o proxy usando o protocolo WebSocket (ws://)
+# [P] = Proxy, [L] = Última Regra
+RewriteRule "^api-streamlit/(.*)$" "ws://streamlit-app:8501/$1" [P,L]
+
+# ----------------------------------------------------------------------
+# REGRA PARA HTTP NORMAL (se a regra de WebSocket falhar)
+# ----------------------------------------------------------------------
+# Regra (para todos os outros pedidos):
+# Faz o proxy usando o protocolo HTTP normal (http://)
+RewriteRule "^api-streamlit/(.*)$" "http://streamlit-app:8501/$1" [P,L]
