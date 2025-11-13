@@ -64,34 +64,34 @@ session_start()
                         <div class="row">
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="empresa_email">E-mail:</label>
-                                <input type="email" class="form-control" name="empresa_email" id="empresa_email" required>
+                                <input type="email" class="form-control" name="empresa_email" id="empresa_email" required aria-label="E-mail da empresa">
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="empresa_senha">Senha:</label>
-                                <input type="password" class="form-control" name="empresa_senha" id="empresa_senha" required>
+                                <input type="password" class="form-control" name="empresa_senha" id="empresa_senha" required aria-label="Senha da empresa">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="empresa_cnpj">CNPJ:</label>
-                                <input type="text" class="form-control" name="empresa_cnpj" id="empresa_cnpj" required>
+                                <input type="text" class="form-control" name="empresa_cnpj" id="empresa_cnpj" required aria-label="CNPJ da empresa" onblur="consultarCNPJ()" maxlength="18">
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="empresa_nome">Nome da Empresa:</label>
-                                <input type="text" class="form-control" name="empresa_nome" id="empresa_nome" required>
+                                <input type="text" class="form-control" name="empresa_nome" id="empresa_nome" required aria-label="Nome da empresa">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="empresa_descricao">Descrição da atividade:</label>
-                                <input type="text" class="form-control" name="empresa_descricao" id="empresa_descricao" required>
+                                <input type="text" class="form-control" name="empresa_descricao" id="empresa_descricao" required aria-label="Descrição da atividade da empresa">
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="empresa_endereco">Endereço:</label>
-                                <input type="text" class="form-control" name="empresa_endereco" id="empresa_endereco" required>
+                                <input type="text" class="form-control" name="empresa_endereco" id="empresa_endereco" required aria-label="Endereço da empresa">
                             </div>
                         </div>
-                        <div class="row pb-1 mb-2 d-flex justify-content-end">
+                        <div class="row py-3 d-flex justify-content-center">
                             <div class="col-3">
                                 <button type="submit" class="btn btn-primary w-100" name="submit" value="Enviar">Enviar</button>
                             </div>

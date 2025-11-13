@@ -102,6 +102,7 @@ if (empty($_SESSION["empresa_id"])) {
     src="/api-streamlit/?embed=true&user_id=<?php echo $_SESSION['empresa_id'];?>"
     frameborder="0"
     scrolling="no"
+    title="Dashboard com as avaliações da empresa"
     style="
         height: 2000px; /* Ajuste a altura conforme o seu dashboard */
         width: 100%;

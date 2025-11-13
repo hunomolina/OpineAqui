@@ -86,36 +86,36 @@ if (empty($_SESSION["empresa_id"])) {
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="empresa_email">E-mail:</label>
-                                        <input type="text" class="form-control" name="empresa_email" id="empres_email" value="<?php echo $email; ?>" required>
+                                        <input type="text" class="form-control" name="empresa_email" id="empres_email" value="<?php echo $email; ?>" required aria-label="E-mail da empresa">
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="empresa_senha">Nova Senha:</label>
-                                        <input type="password" class="form-control" name="empresa_senha" id="empresa_senha" value="<?php echo $senha; ?>" required>
+                                        <input type="password" class="form-control" name="empresa_senha" id="empresa_senha" value="<?php echo $senha; ?>" required aria-label="Senha da empresa">
                                     </div>
                                 </div>
                                 
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="empresa_cnpj">CNPJ:</label>
-                                        <input type="text" class="form-control" name="empresa_cnpj" id="empresa_cnpj" value="<?php echo $cnpj; ?>" required>
+                                        <input type="text" class="form-control" name="empresa_cnpj" id="empresa_cnpj" value="<?php echo $cnpj; ?>" required aria-label="CNPJ da empresa" >
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="empresa_nome">Nome da Empresa:</label>
-                                        <input type="text" class="form-control" name="empresa_nome" id="empresa_nome" value="<?php echo $nome; ?>" required>
+                                        <input type="text" class="form-control" name="empresa_nome" id="empresa_nome" value="<?php echo $nome; ?>" required aria-label="Nome da empresa">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="empresa_descricao">Descrição da atividade:</label>
-                                        <input type="text" class="form-control" name="empresa_descricao" id="empresa_descricao" value="<?php echo $descricao; ?>" required>
+                                        <input type="text" class="form-control" name="empresa_descricao" id="empresa_descricao" value="<?php echo $descricao; ?>" required aria-label="Descrição da atividade da empresa">
                                     </div>
                                     <div class="col-12 col-md-6 mb-4">
                                         <label for="empresa_endereco">Endereço:</label>
-                                        <input type="text" class="form-control" name="empresa_endereco" id="empresa_endereco" value="<?php echo $endereco; ?>" required>
+                                        <input type="text" class="form-control" name="empresa_endereco" id="empresa_endereco" value="<?php echo $endereco; ?>" required aria-label="Endereço da empresa">
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary" name="submit" value="Enviar">Enviar</button>
+                                <button type="submit" class="btn btn-primary mt-3 w-25" name="submit" value="Enviar">Enviar</button>
                             </form>
                             <div id="mensagem_enviar"></div>
                         </div>
