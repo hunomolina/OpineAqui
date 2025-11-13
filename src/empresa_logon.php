@@ -60,13 +60,13 @@ session_start()
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" name='empresa_logon' id='empresa_logon'>
                             <div class="mb-3">
                                 <label for="empresa_email">E-mail:</label>
-                                <input type="text" class="form-control" name="empresa_email" id="empresa_email" required>
+                                <input type="text" class="form-control" name="empresa_email" id="empresa_email" required aria-label="E-mail da empresa">
                             </div>   
                             <div class="mb-4">
                                 <label for="empresa_senha">Senha:</label>
-                                <input type="password" class="form-control" name="empresa_senha" required>
+                                <input type="password" class="form-control" name="empresa_senha" required aria-label="Senha da empresa">
                             </div>
-                            <button type="submit" class="btn btn-primary" name="submit" value="Enviar">Enviar</button>
+                            <button type="submit" class="btn btn-primary mt-3 w-50" name="submit" value="Enviar">Enviar</button>
                             <div id="mensagem_enviar"></div>
                         </form>
                     </div>

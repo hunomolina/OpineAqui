@@ -102,6 +102,9 @@ function cadastrar_avaliacao($id_empresa, $data_atendimento, $nota, $comentario,
 
 function cadastrar_empresa($cnpj, $email, $nome, $descricao, $senha, $endereco) {
     global $conn;
+
+    $cnpj = preg_replace('/\D/', '', $cnpj);
+
     $query = $conn->query("SELECT id FROM Empresa WHERE cnpj = $cnpj OR email = '$email'");
     if ($query->num_rows > 0) {
         // echo "CNPJ ou e-mail já existentes na base. Faça o login.";

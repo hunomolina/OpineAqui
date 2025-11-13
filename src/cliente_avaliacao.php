@@ -101,7 +101,7 @@ require_once 'bd_conexao.php';
                         
                         <div class="col-4">
                             <label for="comentario">Comentário: </label>
-                            <input type="text" class="form-control" name="comentario" id="comentario" required>
+                            <input type="text" class="form-control" name="comentario" id="comentario" required aria-label="Comentário sobre o atendimento">
                         </div>
                     </div>
 
@@ -110,26 +110,25 @@ require_once 'bd_conexao.php';
                     <div class="row d-flex justify-content-center gap-5 mb-2">
                         <div class="col-4">
                             <label for="cliente_nome">Nome:</label>
-                            <input type="tel" class="form-control" name="cliente_nome" id="cliente_nome">
+                            <input type="tel" class="form-control" name="cliente_nome" id="cliente_nome" aria-label="Nome do cliente">
                         </div>
                         <div class="col-3">
                             <label for="cliente_email">E-mail:</label>
-                            <input type="email" class="form-control" name="cliente_email" id="cliente_email">
+                            <input type="email" class="form-control" name="cliente_email" id="cliente_email" aria-label="E-mail do cliente">
                         </div>
                         <div class="col-3">
                             <label for="cliente_celular">Celular:</label>
-                            <input type="text" class="form-control" name="cliente_celular" id="cliente_celular">
+                            <input type="text" class="form-control" name="cliente_celular" id="cliente_celular" aria-label="Celular do cliente">
                         </div>
                     </div>
 
-                    <div class="me-5 pe-3  float-end">
+                    <div class="me-5 pe-3">
                         <br>
                         <input type="checkbox" name="cliente_autorizacao_marketing" id="cliente_autorizacao_marketing" value=true>
                         <label for="cliente_autorizacao_marketing">Autorizo o envio de e-mails com ofertas pela empresa avaliada</label>
-                    </div>
-
-                    <div class="mt-4 mb-2" style="padding-left: 200px;">
-                        <button type="submit" class="btn btn-primary ms-5 mt-3 px-5" name="submit" value="Enviar">Enviar</button>
+                        <div class="mt-5 mb-2">
+                            <button type="submit" class="btn btn-primary px-5" name="submit" value="Enviar">Enviar</button>
+                        </div>
                     </div>
                 </form>
 
